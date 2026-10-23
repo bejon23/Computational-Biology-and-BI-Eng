@@ -5,3 +5,62 @@ Workspace for computational drug discovery, target protein workflows, and molecu
 ## Directory Layout
 - `scripts/`: Custom Python pipeline scripts
 - `docking_data/`: Structure and docking protocol files
+
+
+
+
+Project : 
+
+link: 
+
+
+https://colab.research.google.com/drive/1bammHgdSkbYfWmZeo5bPc2pqDpnQXmL6
+
+
+Project : 
+
+
+Project: "Technical Proof Lab" for Bulk RNA-seq, Variants, Single-cell, Stats and Reproducibility
+
+link: 
+
+https://colab.research.google.com/drive/13p-tu0SvbLSgm38n9kyHpALGB5-DIvri
+
+
+
+
+Project:
+
+
+link : 
+
+https://colab.research.google.com/drive/1wPqn4u5PVEJTt6v1MBjf9vwy0wg30FeZ
+
+
+
+
+Project:
+
+
+link:
+
+
+https://colab.research.google.com/drive/1qJP4gQ3yMhgLiBMipsAoEd_1l59GOiy6
+
+
+
+Project: 
+
+
+link: 
+
+
+https://colab.research.google.com/drive/1volPrFZvJxF9ppTi8bgjFl5WvIi12VLn
+
+
+
+
+
+
+
+
