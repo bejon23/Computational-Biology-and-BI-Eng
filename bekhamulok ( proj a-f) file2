@@ -1,0 +1,131 @@
+Examp prep 3
+
+# qPCR গাইড: ধাপ, Control আর বিশ্লেষণ
+
+qPCR দিয়ে একটা জিনের মাত্রা মাপা হয়। এই গাইডে ৭টা ধাপ, প্রতিটার control, আর ফল বিশ্লেষণের নিয়ম সহজ ভাষায় দেওয়া আছে।
+
+---
+
+## ধাপ ও Control এক নজরে
+
+| ধাপ | কী করা হয় | Control বা যাচাই |
+|---|---|---|
+| ১. RNA extraction | নমুনা থেকে RNA আলাদা করা | Extraction blank (শুধু reagent, নমুনা নেই) |
+
+
+
+| ২. RNA quality check | RNA পরিষ্কার ও অক্ষত কি না দেখা | RIN ৭ বা তার বেশি, A260/280 প্রায় ২.০ |
+
+
+| ৩. cDNA synthesis (RT) | RNA থেকে cDNA বানানো | No-RT control |
+
+
+| ৪. Reaction setup | Mix, primer, cDNA দিয়ে plate সাজানো | NTC আর positive control |
+
+
+| ৫. qPCR run | প্রায় ৪০ cycle চালিয়ে Ct পড়া | Technical triplicate |
+
+
+| ৬. Melt curve | Product একটাই কি না দেখা | একটা sharp peak |
+
+
+| ৭. Data analysis | Normalize করে fold change বের করা | Validated reference gene |
+
+Saimon here
+
+
+## ১. RNA extraction
+**কী করি:** কোষ বা টিস্যু থেকে RNA বের করি।
+
+**Control:** Extraction blank, অর্থাৎ নমুনা ছাড়া শুধু reagent দিয়ে একই প্রক্রিয়া।
+
+**সিদ্ধান্ত:** Blank-এ সিগন্যাল এলে extraction-এ দূষণ আছে। নমুনার ফল বিশ্বাস করা যাবে না।
+
+---
+
+## ২. RNA quality check
+**কী করি:** RNA-র purity ও integrity মাপি।
+
+**মান:**
+- RIN ৭ বা তার বেশি (RNA ভাঙা নয়)
+- A260/280 প্রায় ২.০ (protein দূষণ নেই)
+
+**সিদ্ধান্ত:** RIN ৭-এর নিচে হলে RNA ভাঙা। নমুনা বাদ দাও বা সতর্কতার সাথে ব্যবহার করো।
+
+---
+
+## ৩. cDNA synthesis (Reverse Transcription)
+**কী করি:** RNA-কে cDNA-তে রূপান্তর করি, কারণ PCR চলে DNA-তে।
+
+**Control:** No-RT control, অর্থাৎ reverse transcriptase enzyme ছাড়া একই reaction।
+
+**সিদ্ধান্ত:** No-RT-তে Ct এলে নমুনায় genomic DNA মিশে আছে। তখন DNase treatment করে আবার করো।
+
+---
+
+## ৪. Reaction setup
+**কী করি:** Master mix, primer আর cDNA মিশিয়ে plate-এ বসাই।
+
+**Control:**
+- **NTC (No-template control):** cDNA-র জায়গায় পানি। Primer বা mix-এ contamination ধরে।
+- **Positive control:** জানা উপস্থিতির নমুনা। Reaction নিজে কাজ করছে কি না দেখায়।
+
+**সিদ্ধান্ত:**
+- NTC-তে Ct এলে পুরো রান বাতিল।
+- Positive control না উঠলে primer বা mix নষ্ট।
+
+---
+
+## ৫. qPCR run
+**কী করি:** প্রায় ৪০ cycle চালাই। যে cycle-এ সিগন্যাল threshold পার হয়, সেটাই **Ct**। জিন বেশি থাকলে Ct কম আসে।
+
+**Control:** Technical triplicate, অর্থাৎ একই নমুনা তিনবার।
+
+**সিদ্ধান্ত:** তিনটার Ct-র পার্থক্য ০.৩-এর বেশি হলে pipetting ভুল। আবার করো।
+
+---
+
+## ৬. Melt curve
+**কী করি:** রান শেষে তাপমাত্রা ধীরে বাড়িয়ে সিগন্যাল দেখি (SYBR Green হলে)।
+
+**সিদ্ধান্ত:**
+- একটা sharp peak: product নির্দিষ্ট ও সঠিক।
+- একাধিক peak: primer dimer বা non-specific product আছে। Primer নতুন করে design করো।
+
+---
+
+## ৭. Data analysis (ΔΔCt পদ্ধতি)
+1. **ΔCt** = target জিনের Ct − reference জিনের Ct (প্রতি নমুনায়)
+2. **ΔΔCt** = রোগীর ΔCt − সুস্থের ΔCt
+3. **Fold change** = 2^(−ΔΔCt)
+
+**উদাহরণ:** ΔΔCt = −২ হলে fold change = 2² = **৪ গুণ বেশি**।
+
+**Reference gene সতর্কতা:** GAPDH জনপ্রিয়, কিন্তু hypoxia-র মতো অবস্থায় এর মাত্রা বদলে যায়। তাই reference gene আগে যাচাই করতে হয়, চোখ বুজে ধরা যায় না। সম্ভব হলে একাধিক reference gene ব্যবহার করো।
+
+---
+
+## Control সারাংশ
+
+| Control | কী ধরে |
+|---|---|
+| Extraction blank | Extraction-এ দূষণ |
+| No-RT | Genomic DNA-র মিশ্রণ |
+| NTC | Primer বা mix-এ contamination |
+| Positive control | Reaction কাজ করছে কি না |
+| Triplicate | Pipetting-এর ভুল |
+| Melt curve | Non-specific product |
+| Reference gene | নমুনার পরিমাণের পার্থক্য |
+
+---
+
+## Real case: MIQE guidelines (২০০৯)
+অনেক প্রকাশিত qPCR paper-এ control, primer তথ্য আর reference gene যাচাইয়ের বিবরণ ছিল না। তাই ফল দোহরানো কঠিন ছিল। এর সমাধানে **MIQE guidelines** তৈরি হয়। এখন অনেক journal এই তালিকা মেনে চলতে বলে।
+
+---
+
+## ইন্টারভিউয়ের জন্য এক লাইন
+> "I always run NTC, no-RT, and a validated reference gene, and I check the melt curve, so I can trust the Ct values before calculating fold change."
+
+## Bench ও computation জোড়া
+RNA-seq বা pipeline-এ পাওয়া DE gene qPCR দিয়ে যাচাই করা হয়। Fold change-এর দিক মিললে এবং magnitude কাছাকাছি হলে computational ফল সমর্থিত।
