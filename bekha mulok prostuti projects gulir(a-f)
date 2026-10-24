@@ -1,1 +1,44 @@
 files 1, 2, 3 
+
+Exam prep 1 
+
+Likely questions by topic (simple English, as you prefer):
+1. Hands-on wet lab experience
+Tell me about a wet lab technique you have done yourself (PCR, qPCR, gel, cell culture, extraction).
+Describe an experiment that failed. What went wrong and how did you fix it?
+What controls do you use in PCR or qPCR, and why?
+How do you avoid contamination?
+If you have no bench experience in some area, say so honestly and explain what you understand theoretically.
+2. Research design and scientific judgment
+How would you design an experiment to test whether gene X causes disease Y?
+How many replicates do you need, and why?
+What is the difference between a biological and a technical replicate?
+How do you avoid batch effect and confounding at the design stage?
+A result looks too good. What do you check first?
+3. Analysis of biological data
+Walk me through a bulk RNA-seq analysis from raw reads to DE genes.
+Why FDR and not raw p-values?
+Why raw counts and not TPM for DE?
+How do you check variant quality (Ti/Tv)?
+What is pseudoreplication in single-cell data?
+How do you spot data leakage in an ML model?
+4. Connecting bench and computation
+How would you validate a computational finding at the bench (for example, a DE gene by qPCR)?
+A wet lab result disagrees with your pipeline. What do you do?
+How does sample prep quality (RNA integrity, library prep) affect your analysis?
+How would you explain a bioinformatics result to a bench scientist?
+5. Custom job questions (AI evaluation)
+How do you judge if an AI answer in biology is right or wrong?
+What makes a good benchmark question?
+Give an example of an AI hallucination you caught.
+How do you make your work reproducible?
+What is the weakness of your projects?
+Answer structure that works: answer in one line first, then one reason, then one real example from your projects. Keep each answer to about 60 to 90 seconds, since time per question is limited.
+If you want, I can run a mock interview: I ask one question at a time and you answer, then I give feedback.
+
+
+
+
+
+
+
