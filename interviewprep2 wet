@@ -1,0 +1,131 @@
+# Part 2: Cell culture, Microscopy, Protein, Western, IP/Co-IP, ELISA, Research design
+
+## ঘ. Cell culture
+
+**Q39. Cell culture-এ আপনি কী কী করেছেন?**
+আমি কোষ vial থেকে তুলেছি, medium-এ বাড়িয়েছি, passage করেছি, গুনেছি, seed করে treatment দিয়েছি, তারপর harvest করেছি আর stock freeze করেছি। Medium ছিল সাধারণত DMEM, ১০% FBS আর antibiotic। Incubator ৩৭°C আর ৫% CO₂-তে। প্রতিদিন microscope-এ কোষের আকার আর confluence দেখেছি। প্রতিটা vial-এর passage number লিখে রেখেছি।
+
+**Q40. Aseptic technique কীভাবে মানেন?**
+আমি biosafety cabinet-এ কাজ করি, আগে হাত আর cabinet ৭০% ethanol দিয়ে মুছি। প্রতিটা বোতল আর pipette-এর মুখ স্পর্শ এড়াই, প্রতি কোষ লাইনের জন্য আলাদা medium আর pipette রাখি, আর একসাথে দুই লাইন খুলি না। কাজ শেষে cabinet আবার পরিষ্কার করি।
+
+**Q41. কখন আর কীভাবে passage করেন?**
+কোষ ৭০-৮০% confluent হলে passage করি, কারণ পুরো ভরে গেলে বৃদ্ধি থামে আর কোষের আচরণ বদলে যায়। Medium ফেলে PBS-এ ধুই, trypsin দিয়ে কোষ আলাদা করি, serum-যুক্ত medium দিয়ে trypsin থামাই, centrifuge করে নতুন medium-এ ভাসাই আর নির্দিষ্ট অনুপাতে নতুন flask-এ দিই।
+
+**Q42. কোষ গোনা আর viability কীভাবে দেখেন?**
+Hemocytometer বা automated counter-এ trypan blue দিয়ে গুনি। জীবিত কোষ রং ঢুকতে দেয় না, মরা কোষ নীল হয়। Viability সাধারণত ৯০%-এর উপরে চাই। কম হলে সেই নমুনা দিয়ে পরীক্ষা শুরু করি না।
+
+**Q43. Contamination হয়েছে কীভাবে বুঝেন, আর কী করেন?**
+Bacteria হলে medium ঘোলা আর হলুদ হয়ে যায়, microscope-এ ছোট নড়াচড়া করা কণা দেখা যায়। Fungus হলে সুতোর মতো গঠন বা ভাসমান গুটি দেখা যায়। Mycoplasma চোখে ধরা যায় না, তাই কোষ ধীরে বাড়লে বা অদ্ভুত আচরণ করলে PCR বা kit দিয়ে test করি। দূষিত হলে ওই flask ফেলে দিই, cabinet আর incubator পরিষ্কার করি আর নতুন vial তুলি। অন্য flask-ও পরীক্ষা করি।
+
+**Q44. Cell line-এর পরিচয় কীভাবে নিশ্চিত করেন?**
+STR profiling দিয়ে। আমি জানি অনেক cell line আসলে HeLa দিয়ে দূষিত বা ভুল পরিচয়ের ছিল, তাই শত শত paper-এর ফল প্রশ্নবিদ্ধ হয়েছে। এজন্য আমি নতুন লাইন এলে আর নিয়মিত বিরতিতে authentication আর mycoplasma test করি।
+
+**Q45. কোষ ঠিকমতো বাড়ছে না, কী করেন?**
+আমি কারণ খুঁজি: বেশি passage-এর পুরনো কোষ, পুরনো বা খারাপ FBS lot, ভুল CO₂ বা তাপমাত্রা, mycoplasma, বা বেশি trypsin। প্রথমে mycoplasma আর incubator দেখি, তারপর নতুন medium আর নতুন FBS lot, শেষে কম passage-এর নতুন vial।
+
+**Q46. কোষ freeze আর thaw কীভাবে করেন?**
+Freeze-এর জন্য ভালো অবস্থার কোষ নিই, freezing medium-এ ১০% DMSO দিই, ধীরে (প্রায় −১°C প্রতি মিনিটে) ঠান্ডা করে −৮০°C-এ রাখি, তারপর liquid nitrogen-এ সংরক্ষণ করি। Thaw দ্রুত করি (৩৭°C-এ), তারপর DMSO বিষাক্ত বলে দ্রুত ধুয়ে ফেলি বা পাতলা করি।
+
+## ঙ. Microscopy
+
+**Q47. কোন ধরনের microscopy করেছেন, কখন কোনটা ব্যবহার করেন?**
+Bright-field দিয়ে রঙ করা নমুনা দেখি। Phase contrast দিয়ে জীবিত, রঙ না করা কোষ দেখি (প্রতিদিনের culture check)। Fluorescence দিয়ে নির্দিষ্ট protein বা DAPI-রঞ্জিত নিউক্লিয়াস দেখি। Confocal দিয়ে স্তর ধরে পরিষ্কার ছবি আর protein-এর অবস্থান (co-localization) দেখি।
+
+**Q48. Immunofluorescence-এর ধাপ বলুন।**
+কোষ coverslip-এ বাড়াই। ৪% PFA দিয়ে fix করি। Triton X-100 দিয়ে permeabilize করি, যাতে antibody ভেতরে ঢোকে। BSA বা serum দিয়ে block করি। Primary antibody লাগাই, ধুই, fluorescent secondary antibody আর DAPI দিই, ধুয়ে mount করি। তারপর ছবি তুলি।
+
+**Q49. কোন control রাখেন, কেন?**
+No-primary control (শুধু secondary দিয়ে) দেখায় secondary antibody নিজে non-specific লাগছে কি না। Isotype control দেখায় antibody-র সাধারণ লেগে যাওয়া। Unstained নমুনা autofluorescence দেখায়। সম্ভব হলে positive আর negative কোষ (যেমন knockdown) রাখি।
+
+**Q50. ছবিতে background বেশি বা signal মিলিয়ে যাচ্ছে, কী করেন?**
+Background বেশি হলে blocking বাড়াই, antibody dilute করি আর ধোয়া বাড়াই। Signal মিলিয়ে গেলে (photobleaching) anti-fade mounting medium নিই আর exposure কমাই। Autofluorescence থাকলে অন্য fluorophore নিই। দুই channel মিশে গেলে একটা একটা করে (sequential) ছবি তুলি।
+
+**Q51. ছবি থেকে সংখ্যা কীভাবে বের করেন?**
+আমি ImageJ/Fiji ব্যবহার করি। সব নমুনায় একই exposure আর একই setting রাখি, প্রতি নমুনায় একাধিক field নিই, আর গোনার সময় নমুনার নাম না জেনে (blinded) করি। তারপর সংখ্যাকে statistics দিয়ে তুলনা করি, শুধু "ছবি সুন্দর" বলে থামি না।
+
+## চ. Protein purification
+
+**Q52. Protein purification-এর ধাপ বলুন।**
+আমি E. coli-তে protein express করাই, IPTG দিয়ে induce করি। কোষ ভেঙে (lysozyme বা sonication, সাথে protease inhibitor) centrifuge করে পরিষ্কার lysate নিই। His-tag হলে Ni-NTA affinity column-এ লাগাই, কম imidazole দিয়ে ধুই, বেশি imidazole দিয়ে elute করি। দরকারে size exclusion chromatography করি। শেষে SDS-PAGE-এ purity দেখি, BCA বা Bradford-এ concentration মাপি, আর glycerol দিয়ে −৮০°C-এ রাখি।
+
+**Q53. Ni-NTA কীভাবে কাজ করে?**
+His-tag-এর histidine অংশ nickel-এর সাথে বাঁধে। বাকি protein বেরিয়ে যায় বা কম imidazole-এ ধুয়ে যায়। বেশি imidazole histidine-এর সাথে প্রতিযোগিতা করে আমার protein-কে নিচে নামিয়ে আনে।
+
+**Q54. Protein insoluble হলে কী করেন?**
+Expression-এর তাপমাত্রা ১৬-১৮°C-এ নামাই, IPTG কম দিই, solubility tag (যেমন MBP বা SUMO) ব্যবহার করি, বা অন্য strain নিই। এতে না হলে inclusion body থেকে denature করে refold করার চেষ্টা করি।
+
+**Q55. Purity আর yield কীভাবে যাচাই করেন?**
+প্রতিটা fraction (flow-through, wash, elution) SDS-PAGE-এ চালাই, তাই জানি protein কোথায় হারিয়েছে আর অশুদ্ধি কোথা থেকে এসেছে। Uninduced আর induced নমুনা পাশাপাশি রাখি। Concentration BCA, Bradford বা A280 দিয়ে মাপি।
+
+**Q56. Protein ভেঙে যাচ্ছে বা জমাট বাঁধছে, কী করেন?**
+Protease inhibitor দিই, সব কাজ ঠান্ডায় আর দ্রুত করি। জমাট বাঁধলে buffer-এর pH আর salt বদলাই, glycerol বা DTT যোগ করি, আর বারবার freeze-thaw এড়াতে ছোট aliquot করি।
+
+## ছ. Western blot
+
+**Q57. Western blot-এর ধাপ বলুন।**
+কোষ RIPA buffer আর inhibitor দিয়ে ভাঙি। BCA দিয়ে protein মাপি আর সমান পরিমাণ (২০-৩০ µg) load করি। SDS-PAGE চালাই, তারপর PVDF বা nitrocellulose-এ transfer করি। Ponceau দিয়ে দেখি transfer ঠিক হয়েছে কি না। Milk বা BSA দিয়ে block করি, primary antibody লাগাই (রাতভর ৪°C), ধুই, HRP-যুক্ত secondary লাগাই, ECL দিয়ে ছবি তুলি। শেষে loading control-এ আবার probe করে ImageJ-এ densitometry করি।
+
+**Q58. Loading control কেন?**
+সব lane-এ protein সমান গেছে কি না দেখতে। β-actin, tubulin বা GAPDH ব্যবহার করি। Treatment যে protein-এর মাত্রা বদলায় সেটা আমি loading control হিসেবে নিই না। আমার target আর loading control-এর আকার কাছাকাছি হলে আলাদা antibody বা stripping লাগে।
+
+**Q59. Band আসেনি, কী করেন?**
+প্রথমে Ponceau-তে transfer দেখি। তারপর protein পরিমাণ, antibody dilution আর expiry, secondary antibody, ECL substrate। Positive control lysate দিয়ে পরীক্ষা করি reaction নিজে কাজ করছে কি না।
+
+**Q60. একাধিক band বা বেশি background এলে?**
+একাধিক band হলে antibody-র specificity, protein ভাঙা বা modification সন্দেহ করি, আর knockdown lysate দিয়ে আসল band চিনি। Background বেশি হলে blocking বাড়াই, antibody dilute করি আর ধোয়া বাড়াই।
+
+**Q61. Band-এর মাত্রা কীভাবে তুলনা করেন?**
+আমি ছবি saturated হওয়ার আগের exposure নিই, কারণ saturated হলে তুলনা ভুল হয়। ImageJ-এ band-এর intensity মেপে loading control দিয়ে ভাগ করি আর একাধিক biological replicate-এর গড় নিই।
+
+## জ. IP ও Co-IP
+
+**Q62. Co-IP কী আর ধাপগুলো কী?**
+Co-IP দেখায় দুটো protein একই complex-এ আছে কি না। আমি মৃদু, non-denaturing buffer-এ কোষ ভাঙি যাতে complex ভেঙে না যায়। Beads দিয়ে pre-clear করি, তারপর bait protein-এর antibody যোগ করি, Protein A/G beads দিয়ে টেনে নিই, কয়েকবার ধুই, elute করে Western blot-এ bait আর prey দুটোই দেখি।
+
+**Q63. কোন control রাখেন?**
+Input (মোট lysate-এর ৫-১০%), IgG isotype control, শুধু beads-এর control, আর সম্ভব হলে উল্টো দিক থেকে Co-IP (reciprocal) আর knockout কোষ। IgG control দেখায় prey antibody-র সাধারণ লেগে যাওয়ায় আসছে কি না।
+
+**Q64. Background বেশি বা interaction হারিয়ে গেলে?**
+Background বেশি হলে pre-clearing করি আর ধোয়া কড়া করি। দুর্বল interaction হারিয়ে গেলে ধোয়া মৃদু করি বা crosslink করি। Antibody-র heavy/light chain আসল band ঢেকে ফেললে light-chain specific secondary নিই বা antibody-কে beads-এ crosslink করি।
+
+**Q65. Co-IP কী প্রমাণ করে আর কী করে না?**
+এটা দেখায় দুটো protein একই complex-এ আছে। এটা প্রমাণ করে না যে তারা সরাসরি যুক্ত, কারণ মাঝে অন্য protein থাকতে পারে। সরাসরি যোগের প্রমাণ লাগলে আমি purified protein দিয়ে pull-down বা proximity ligation assay-এর মতো আলাদা পদ্ধতি ব্যবহার করব।
+
+## ঝ. ELISA ও Immunoassay
+
+**Q66. Sandwich ELISA-র ধাপ বলুন।**
+Plate-এ capture antibody লাগাই, block করি, নমুনা আর standard দিই, detection antibody দিই, HRP আর TMB substrate দিই, stop solution দিয়ে থামাই আর ৪৫০ nm-এ OD পড়ি। Standard curve (৪-parameter fit) থেকে নমুনার concentration বের করি।
+
+**Q67. কোন control আর quality check রাখেন?**
+Standard curve (R² ভালো), blank, positive আর negative control, duplicate বা triplicate, আর spike-recovery। আমি concentration শুধু curve-এর বৈধ পরিসরের ভেতরে বলি। পরিসরের বাইরে হলে নমুনা dilute করে আবার করি।
+
+**Q68. ELISA-য় সাধারণ সমস্যা আর সমাধান?**
+Background বেশি হলে ধোয়া আর blocking বাড়াই। Duplicate-এ বেশি তফাত হলে pipetting আর plate washer দেখি। Edge effect হলে বাইরের well এড়াই। নমুনা curve-এর বাইরে গেলে dilute করি।
+
+## ঞ. Research design
+
+**Q69. জিন X রোগ Y ঘটায় কি না, কীভাবে পরীক্ষা করবেন?**
+প্রথমে রোগী আর সুস্থের expression বা variant তুলনা করি, সেটা association। তারপর CRISPR বা siRNA দিয়ে জিন বন্ধ করে দেখি রোগের বৈশিষ্ট্য বদলায় কি না। তারপর জিন ফিরিয়ে দিলে ফল ঠিক হয় কি না দেখি (rescue)। প্রতিটা ধাপে control আর replicate রাখি। আমি মনে রাখি association আর causation আলাদা, শুধু expression বেশি দেখে বলি না যে জিনটা রোগ ঘটায়।
+
+**Q70. কয়টা replicate লাগবে, কেন?**
+Replicate ছাড়া variation মাপা যায় না, তাই p-value অর্থহীন। RNA-seq-এ আমি প্রতি group-এ কমপক্ষে তিনটা রাখি, বেশি হলে ভালো। সংখ্যাটা power analysis দিয়ে ঠিক করি, expected effect size, variance আর alpha ধরে। দুটো replicate দিয়ে variance-এর অনুমান নির্ভরযোগ্য হয় না।
+
+**Q71. Biological আর technical replicate-এর পার্থক্য কী?**
+Biological replicate মানে আলাদা প্রাণী বা আলাদা রোগী, যা প্রকৃতির আসল variation ধরে। Technical replicate মানে একই নমুনা বারবার মাপা, যা শুধু হাত বা যন্ত্রের variation ধরে। Technical replicate-কে biological ধরলে ফল ফুলে-ফেঁপে ভালো দেখায়, এটাই pseudoreplication।
+
+**Q72. Batch effect আর confounding কীভাবে এড়ান?**
+Design-এর সময়ই প্রতি batch-এ রোগী ও সুস্থ দুই ধরনের নমুনা রাখি (balanced design), আর নমুনার ক্রম randomize করি। আমি জানি Spielman et al. (২০০৭) HapMap নমুনায় জনগোষ্ঠীর মধ্যে expression-এর পার্থক্য পেয়েছিলেন। পরে Akey et al. (২০০৭) দেখান নমুনাগুলো আলাদা সময়ে process হয়েছিল, তাই পার্থক্যের বড় অংশ processing date থেকে আসতে পারে। এটা design-এর ভুল, পরে statistics দিয়ে পুরো সারানো যায় না।
+
+**Q73. ফল বেশিই ভালো দেখালে প্রথমে কী করেন?**
+আমি আগে সন্দেহ করি, উদযাপন পরে। দেখি data leakage আছে কি না, batch বা sample label-এ ভুল আছে কি না, multiple testing correction হয়েছে কি না, আর random data দিয়ে চালালে একই ফল আসে কি না। আমি জানি Duke-এর Anil Potti-র chemotherapy-সাড়া signature-এর উপর clinical trial শুরু হয়েছিল। Baggerly ও Coombes পুনর্বিশ্লেষণ করে দেখান data-তে row বা label এক ঘর সরে যাওয়ার মতো ভুল ছিল। Trial বন্ধ হয় আর paper প্রত্যাহার হয়। এর শিক্ষা: ফল খুব সুন্দর হলে raw data পর্যন্ত ফিরে যাই।
+
+**Q74. যেকোনো ব্যর্থ experiment আপনি কীভাবে troubleshoot করেন?**
+আমি একই ক্রমে যাই: প্রথমে control (positive আর negative কী বলছে), তারপর input-এর মান (RNA, DNA বা protein), তারপর reagent (মেয়াদ, lot, নতুন aliquot), তারপর condition (তাপমাত্রা, সময়, concentration)। একবারে একটা জিনিস বদলাই আর প্রতিটা পরিবর্তন লিখে রাখি।
+
+**Q75. Positive আর negative control-এর পার্থক্য কী?**
+Positive control এমন নমুনা যেখানে ফল আসবে বলে আমি জানি, তা দেখায় পদ্ধতি নিজে কাজ করছে। Negative control এমন নমুনা যেখানে ফল আসার কথা নয়, তা দেখায় contamination বা non-specific সংকেত নেই। দুটো না থাকলে ফলের মানে বোঝা যায় না।
+
+**Q76. Randomization আর blinding কেন?**
+Randomization নমুনা বা treatment বণ্টনে আমার অজান্তে পক্ষপাত আটকায়। Blinding ফল পড়ার সময় আমার প্রত্যাশা যাতে মাপাকে প্রভাবিত না করে তা নিশ্চিত করে। দুটোই ফলকে বিশ্বাসযোগ্য করে।
+
+**Part 3** হবে পুরোপুরি MLE ও AI-ভিত্তিক: ML fundamentals, evaluation metrics, leakage, deep learning, transformers/LLM, RAG, fine-tuning, MLOps (Docker, FastAPI, CI/CD), biomedical AI আর AI evaluation। "next" লিখলে পাঠাব।
