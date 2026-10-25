@@ -1,0 +1,213 @@
+# Part 3: MLE ও AI (আমার উত্তর)
+
+## ক. ML fundamentals
+
+**Q77. Overfitting কী, কীভাবে ধরি আর কীভাবে ঠেকাই?**
+Model training data মুখস্থ করে ফেললে overfitting হয়। Training score ভালো কিন্তু validation বা test score খারাপ হলে আমি বুঝি। ঠেকাতে আমি বেশি data নিই, model সরল করি, regularization (L1/L2, dropout), early stopping আর cross-validation ব্যবহার করি। Biomedical data-তে নমুনা কম আর feature বেশি, তাই আমি এ নিয়ে বিশেষ সতর্ক থাকি।
+
+**Q78. Bias-variance trade-off বুঝিয়ে বলুন।**
+Bias বেশি মানে model খুব সরল, প্যাটার্ন ধরতে পারে না (underfitting)। Variance বেশি মানে model data-র শব্দও শিখে ফেলে (overfitting)। আমি validation curve দেখে মাঝামাঝি জটিলতা বাছি।
+
+**Q79. Cross-validation কেন, আর biomedical data-তে কী খেয়াল রাখি?**
+একটা split-এর ফল ভাগ্যের উপর নির্ভর করে, তাই k-fold CV দিয়ে গড় ও spread দেখি। Biomedical data-তে আমি **patient-level split** করি, মানে একই রোগীর সব নমুনা একই fold-এ থাকে। নইলে একই রোগী train ও test দুই দিকে চলে যায় আর ফল ফুলে যায়। Class imbalance থাকলে stratified CV নিই।
+
+**Q80. Data leakage কীভাবে ধরি?**
+Split-এর আগে normalization, imputation বা feature selection করেছি কি না দেখি। একই রোগী বা পরিবারের নমুনা দুই দিকে আছে কি না দেখি। **Label shuffle test** চালাই: label এলোমেলো করলে performance random-এ নামা উচিত, না নামলে leakage। আমি জানি Kapoor ও Narayanan (২০২৩, Patterns) অনেক শাখার ML paper দেখে বলেছেন leakage ব্যাপক সমস্যা।
+
+**Q81. Imbalanced data-তে কী করি?**
+প্রথমে accuracy ছেড়ে precision, recall, F1, PR-AUC দেখি। তারপর class weight, resampling (SMOTE শুধু training fold-এর ভেতরে), বা threshold ঠিক করা। SMOTE split-এর আগে করলে leakage হয়, তাই আমি সেটা fold-এর ভেতরেই রাখি।
+
+**Q82. কোন metric কখন?**
+
+| পরিস্থিতি | আমার metric |
+|---|---|
+| Balanced classification | Accuracy, ROC-AUC |
+| Rare disease, imbalance | PR-AUC, recall, precision |
+| Screening (মিস করা চলবে না) | Sensitivity বেশি রাখি |
+| Regression | RMSE, MAE, R² |
+| Survival | C-index, time-dependent AUC |
+| Probability ঠিক কি না | Calibration curve, Brier score |
+| Ranking/retrieval | Recall@k, MRR, nDCG |
+
+**Q83. ROC-AUC আর PR-AUC-এর পার্থক্য কী?**
+ROC-AUC সব threshold-এ true positive rate বনাম false positive rate দেখায়। Rare positive হলে negative অনেক বেশি থাকে, তাই false positive rate ছোট দেখায় আর ROC-AUC বেশি ভালো লাগে। PR-AUC precision আর recall দেখায়, তাই imbalance-এ আমার কাছে বেশি সৎ।
+
+**Q84. Calibration কী, কেন গুরুত্বপূর্ণ?**
+Model যদি ৭০% সম্ভাবনা বলে, তাহলে এমন ১০০ রোগীর প্রায় ৭০ জনের আসলে ঘটনা ঘটা উচিত। Clinical সিদ্ধান্তে probability-ই ব্যবহার হয়, তাই calibration curve দেখি আর দরকারে Platt scaling বা isotonic regression করি।
+
+**Q85. Random Forest আর XGBoost-এর পার্থক্য কী, কখন কোনটা?**
+Random Forest অনেক গাছ আলাদা আলাদা বানিয়ে ভোট নেয় (bagging), তাই স্থিতিশীল আর কম tuning লাগে। XGBoost একটা গাছের ভুল পরের গাছ ঠিক করে (boosting), তাই tabular data-তে সাধারণত বেশি নির্ভুল, কিন্তু overfit-এর ঝুঁকি আর tuning বেশি। Tabular biomedical data-তে আমি XGBoost দিয়ে শুরু করি, সাথে একটা সরল baseline (logistic regression) রাখি।
+
+**Q86. Hyperparameter tuning কীভাবে করি?**
+Nested cross-validation বা অন্তত validation set দিয়ে, test set একদম আলাদা রেখে। Grid search ছোট space-এ, random বা Bayesian search (Optuna) বড় space-এ। Test set দিয়ে tuning করলে সেটাও leakage।
+
+**Q87. Feature selection কোথায় করি, আর বেশি feature-কম নমুনা হলে?**
+Feature selection CV fold-এর ভেতরে করি, বাইরে নয়। Genomic data-তে feature (জিন) হাজার, নমুনা কয়েকশো, তাই ElasticNet বা LASSO, variance filter আর PCA ব্যবহার করি। Biological knowledge দিয়েও feature কমাই।
+
+**Q88. Model কেন সেই সিদ্ধান্ত নিল, বুঝি কীভাবে?**
+আমি SHAP ব্যবহার করি: global importance আর প্রতি রোগীর জন্য কোন feature কতটা ঠেলেছে। তবে SHAP কারণ প্রমাণ করে না, শুধু model কী ব্যবহার করেছে তা দেখায়। যদি শীর্ষ feature আসলে batch বা hospital-এর চিহ্ন হয়, সেটা আমি এভাবেই ধরি।
+
+## খ. Biomedical ML
+
+**Q89. Survival analysis কেন সাধারণ classification নয়?**
+কারণ censoring আছে: অনেক রোগীর ঘটনা (মৃত্যু বা রোগ ফেরা) নজরদারির সময়ের মধ্যে ঘটেনি। সাধারণ classification এই তথ্য ফেলে দেয়। আমি Kaplan-Meier আর log-rank দিয়ে group তুলনা করি, Cox regression দিয়ে hazard ratio বের করি, আর deep বা tree-ভিত্তিক survival model-ও ব্যবহার করি। Metric হিসেবে C-index আর time-dependent AUC দেখি।
+
+**Q90. EHR data-র বড় সমস্যা কী, কীভাবে সামলাই?**
+Missing value, অনিয়মিত সময়ের measurement, ভুল কোড, আর অনেক সময় label নিজেই অনির্ভরযোগ্য। আমি missingness-এর প্যাটার্ন বুঝি (এটা নিজেই তথ্য হতে পারে), ঠিকঠাক imputation করি (শুধু training থেকে শিখে), আর ভবিষ্যতের তথ্য feature-এ ঢুকছে কি না সময়-ভিত্তিক split দিয়ে দেখি।
+
+**Q91. আপনার multi-modal patient outcome project কী ছিল?**
+আমি EHR, genomic profile আর clinical note এক জায়গায় আনার ETL pipeline বানিয়েছিলাম (PostgreSQL, SQLAlchemy)। Clinical note থেকে তথ্য বের করতে BERT-ভিত্তিক NLP model fine-tune করেছিলাম। তারপর structured, genomic আর text feature জুড়ে survival আর classification model বানিয়েছিলাম। Experiment tracking করেছিলাম Weights & Biases-এ। লক্ষ্য ছিল চিকিৎসকদের জন্য ব্যবহারযোগ্য, ব্যাখ্যাযোগ্য পূর্বাভাস।
+
+**Q92. Multi-modal data কীভাবে জোড়া লাগাই?**
+আমি তিন ধরনের পদ্ধতি জানি: early fusion (সব feature একসাথে জুড়ে), late fusion (আলাদা model-এর ফল মিলিয়ে), আর intermediate fusion (প্রতি modality-র embedding শিখে তারপর জুড়ে)। আমি সরল late fusion দিয়ে শুরু করি, কারণ এতে প্রতিটা modality-র অবদান আলাদা দেখা যায়, তারপর দরকার হলে জটিল পদ্ধতিতে যাই।
+
+**Q93. আপনার drug discovery suite-এ কী ছিল?**
+আমি Python-ভিত্তিক একটা suite বানিয়েছি যেখানে ML (XGBoost, Transformer) আর classical molecular docking (AutoDock Vina) একসাথে চলে। RDKit দিয়ে molecule-এর fingerprint বা descriptor বানাই, ProDy দিয়ে protein-এর কাঠামো সামলাই, docking দিয়ে binding pose আর score পাই, আর ML দিয়ে candidate-দের ranking করি। FastAPI দিয়ে এটাকে service হিসেবে দিই।
+
+**Q94. Docking score কি আসল binding affinity?**
+না। Docking score একটা অনুমান, যা scoring function-এর সরলীকরণের উপর দাঁড়ানো। আমি redocking দিয়ে pose যাচাই করি, ভালো candidate-এ MD simulation (RMSD, RMSF) চালাই, আর শেষ প্রমাণ experiment। আমার ML model-ও যদি docking score-এর উপর train হয়, তাহলে সেই ভুলও শিখে নেয়, তাই আমি সতর্ক থাকি।
+
+**Q95. Drug-likeness বা molecule data-তে ML করতে কী খেয়াল রাখি?**
+Train আর test-এ molecule-গুলো গঠনে একই পরিবারের হলে ফল ফুলে যায়, তাই আমি scaffold split নিই। Data-র সূত্র আর assay-র ধরন মিলিয়ে দেখি, কারণ আলাদা lab-এর মাপ সরাসরি তুলনীয় নয়।
+
+## গ. Deep learning ও Transformer
+
+**Q96. Attention কী?**
+প্রতিটা token অন্য সব token-এর দিকে তাকিয়ে ঠিক করে কোনটা কতটা গুরুত্বপূর্ণ। এটা query, key আর value দিয়ে হয়: query আর key-এর মিল থেকে ওজন বের হয়, সেই ওজন দিয়ে value-র যোগফল নিই। এতে দূরের শব্দের সম্পর্কও ধরা পড়ে আর পুরো sequence সমান্তরালে process হয়।
+
+**Q97. BERT আর GPT-এর পার্থক্য কী?**
+BERT encoder-only, দুই দিক থেকে context দেখে, তাই বোঝার কাজে ভালো (classification, NER, embedding)। GPT decoder-only, শুধু আগের token দেখে পরেরটা অনুমান করে, তাই text তৈরির কাজে ভালো। আমি clinical note থেকে তথ্য বের করতে BERT-ভিত্তিক model আর উত্তর তৈরিতে LLM ব্যবহার করি।
+
+**Q98. Tokenization আর positional encoding কেন?**
+Model শব্দ নয়, সংখ্যা বোঝে, তাই text-কে token-এ ভাঙি (subword, যেমন BPE)। Attention নিজে ক্রম বোঝে না, তাই position-এর তথ্য যোগ করতে হয়। RoPE (rotary embedding) সেই তথ্য query ও key-কে ঘুরিয়ে সরাসরি ঢোকায়, যাতে আপেক্ষিক দূরত্ব ধরা পড়ে আর দীর্ঘ context ভালো সামলায়। Biomedical text-এ জটিল শব্দ (জিনের নাম, ওষুধ) subword-এ ভেঙে যায়, এটা মনে রাখি।
+
+**Q99. Fine-tuning না RAG, কখন কোনটা?**
+জ্ঞান বদলায় বা নির্দিষ্ট নথি থেকে উত্তর দরকার, সূত্র দেখাতে হবে: RAG। আচরণ, ভঙ্গি, বা নির্দিষ্ট কাজের ধরন (যেমন নির্দিষ্ট format-এ আউটপুট) শেখাতে হবে: fine-tuning। অনেক সময় দুটো একসাথে। Fine-tuning-এর খরচ কমাতে আমি LoRA বা QLoRA-র মতো parameter-efficient পদ্ধতি নিই।
+
+**Q100. LoRA কীভাবে কাজ করে?**
+মূল weight জমিয়ে রেখে প্রতি layer-এ দুটো ছোট low-rank matrix যোগ করি, শুধু সেগুলো train হয়। তাই memory আর সময় অনেক কম লাগে, আর adapter আলাদা রাখা যায়।
+
+**Q101. Embedding কী, আর কীভাবে ভালো embedding বাছি?**
+Embedding হলো text-কে এমন সংখ্যার ভেক্টর, যেখানে অর্থ কাছাকাছি হলে ভেক্টর কাছাকাছি। আমি E5-র মতো model ব্যবহার করেছি। আমি নিজের data-র একটা ছোট প্রশ্ন-উত্তর সেট বানিয়ে Recall@k মেপে বাছি, কারণ leaderboard-এর ফল আমার domain-এ নাও মিলতে পারে।
+
+## ঘ. LLM ও RAG
+
+**Q102. আপনার RAG system বুঝিয়ে বলুন।**
+গবেষকদের ১০,০০০-এর বেশি paper থেকে তথ্য সংশ্লেষণ করা কঠিন ছিল। আমি agentic RAG pipeline বানিয়েছি। Paper-গুলো parse করে chunk করি (parent-document chunking, যাতে ছোট chunk দিয়ে খুঁজি কিন্তু বড় প্রসঙ্গ দিয়ে উত্তর দিই)। Hybrid search ব্যবহার করি: dense (embedding, FAISS) আর sparse (BM25) একসাথে। প্রশ্ন নতুন করে লিখি বা HyDE দিয়ে একটা কাল্পনিক উত্তর বানিয়ে খুঁজি। Cross-encoder reranker দিয়ে শীর্ষ ফল আবার সাজাই। তারপর LLM (Llama-3) সেই context থেকে সূত্রসহ উত্তর দেয়। পুরোটা Docker-এ container করে FastAPI service হিসেবে চালাই, আর RAGAS দিয়ে মাপি। CV-তে আমি লিখেছি এতে গবেষণা সংশ্লেষণের সময় প্রায় ৭০% কমেছে।
+
+**Q103. Chunking কীভাবে করি, আর কেন গুরুত্বপূর্ণ?**
+খুব ছোট chunk-এ প্রসঙ্গ হারায়, খুব বড় chunk-এ অপ্রাসঙ্গিক অংশ ঢোকে। আমি paper-এর কাঠামো (section) ধরে chunk করি, সামান্য overlap রাখি, আর parent-document পদ্ধতিতে ছোট chunk দিয়ে খুঁজে বড় অংশ ফেরত দিই। Table আর figure caption আলাদা সামলাই।
+
+**Q104. Hybrid search কেন?**
+Dense search অর্থ ধরে কিন্তু নির্দিষ্ট শব্দ (জিনের নাম, ওষুধের নাম, ID) মিস করতে পারে। BM25 নির্দিষ্ট শব্দ ধরে কিন্তু প্রতিশব্দ ধরে না। দুটো জুড়লে (যেমন reciprocal rank fusion) আমি দুই দিকের সুবিধা পাই, বিশেষ করে biomedical শব্দভান্ডারে।
+
+**Q105. Reranker কেন, আর bi-encoder-এর সাথে পার্থক্য কী?**
+Bi-encoder প্রশ্ন আর নথি আলাদা encode করে, তাই দ্রুত কিন্তু সূক্ষ্ম নয়। Cross-encoder প্রশ্ন আর নথি একসাথে দেখে, তাই অনেক নির্ভুল কিন্তু ধীর। আমি প্রথমে দ্রুত পদ্ধতিতে শীর্ষ ৫০-১০০ আনি, তারপর cross-encoder দিয়ে শীর্ষ ৫-১০ বাছি।
+
+**Q106. HyDE কী?**
+প্রশ্ন ছোট আর নথি লম্বা, তাই দুটোর embedding মেলে না। HyDE-তে আমি LLM-কে দিয়ে প্রশ্নের একটা কাল্পনিক উত্তর লেখাই, তারপর সেই উত্তরের embedding দিয়ে খুঁজি। এতে নথির ভঙ্গির কাছাকাছি যাওয়া যায়। তবে কাল্পনিক উত্তরে ভুল তথ্য থাকলে খোঁজা ভুল দিকে যেতে পারে, তাই আমি এটা মেপে দেখি কাজ করছে কি না।
+
+**Q107. RAG-এর মান কীভাবে মাপি?**
+আমি retrieval আর generation আলাদা মাপি। Retrieval: Recall@k, MRR। Generation: RAGAS-এর faithfulness (উত্তর context-এর সাথে মেলে কি না), answer relevancy, context precision আর context recall। সাথে একটা হাতে বানানো সোনার প্রশ্ন-উত্তর সেট রাখি, আর নমুনা উত্তর নিজে পড়ে দেখি। Automated metric একা বিশ্বাস করি না।
+
+**Q108. RAG-এ hallucination কীভাবে কমাই?**
+Context-এর বাইরে গেলে "জানি না" বলতে prompt-এ নির্দেশ দিই, প্রতিটা দাবির সাথে সূত্র (chunk ID, paper) আনতে বলি, ভালো retrieval আর reranking রাখি, আর কম temperature ব্যবহার করি। তারপর faithfulness মাপি আর citation আসলেই context-এ আছে কি না যাচাই করি। যে তথ্য জীবন-মৃত্যুর সাথে জড়িত, সেখানে মানুষ-যাচাই রাখি।
+
+**Q109. LLM-এর উত্তর বানোয়াট কি না কীভাবে ধরি?**
+আমি citation আসলে আছে কি না (DOI, PubMed) খুঁজি, tool বা flag-এর নাম documentation-এ মিলাই, সংখ্যা মূল উৎসে মিলাই, আর একই প্রশ্ন একাধিকবার করে উত্তর স্থির কি না দেখি। অস্থির উত্তর প্রায়ই বানোয়াট।
+
+**Q110. ReAct আর agent কী?**
+ReAct-এ model পালা করে ভাবে (reason) আর কাজ করে (tool call: search, calculator, database), ফল দেখে আবার ভাবে। আমি LangChain আর LangGraph দিয়ে এমন agent বানিয়েছি। আমি ধাপ সীমিত রাখি, tool-এর ইনপুট যাচাই করি আর প্রতিটা ধাপ log করি, কারণ agent ভুল জায়গায় ঘুরতে পারে।
+
+**Q111. Chain-of-thought কী, কখন কাজে লাগে?**
+Model-কে ধাপে ধাপে ভাবতে বললে জটিল যুক্তির কাজে (গণিত, বহু-ধাপের biology প্রশ্ন) নির্ভুলতা বাড়ে। তবে লেখা যুক্তি সবসময় model-এর আসল প্রক্রিয়া নয়, তাই আমি শুধু যুক্তির সুন্দর লেখা দেখে বিশ্বাস করি না, উত্তর আর ধাপ আলাদা যাচাই করি।
+
+**Q112. Prompt কীভাবে লিখি?**
+পরিষ্কার ভূমিকা, কাজ, ইনপুট, আউটপুট format আর উদাহরণ (positive আর negative) দিই। কী করা যাবে না তাও লিখি। তারপর একটা ছোট test সেটে বিভিন্ন prompt তুলনা করি, অনুমানে নয়। আউটপুট JSON চাইলে schema দিই আর parse করার আগে যাচাই করি।
+
+**Q113. LLM-as-judge-এর সীমা কী?**
+Judge model লম্বা উত্তর পছন্দ করে, নিজের মতো ভঙ্গি পছন্দ করে আর অনেক সময় ভুল তথ্য ধরতে পারে না। তাই আমি স্পষ্ট rubric দিই, কিছু নমুনা মানুষ দিয়ে যাচাই করে judge-এর সাথে মানুষের মিল মাপি, আর কঠিন বা বিশেষজ্ঞ-নির্ভর প্রশ্নে মানুষ-মূল্যায়ন রাখি।
+
+**Q114. LLM serving আর vLLM কী?**
+LLM চালানো ব্যয়বহুল আর ধীর। vLLM PagedAttention আর continuous batching দিয়ে GPU memory আর throughput ভালো ব্যবহার করে, তাই একসাথে অনেক অনুরোধ দ্রুত সামলায়। আমি latency, throughput আর খরচ একসাথে মাপি।
+
+## ঙ. MLOps ও deployment
+
+**Q115. একটা model আপনি কীভাবে deploy করেন?**
+Model আর preprocessing একসাথে সংরক্ষণ করি, FastAPI-তে endpoint বানাই (ইনপুট validation সহ), Dockerfile দিয়ে container বানাই (version pin করা), Uvicorn-এ চালাই আর Render বা অন্য host-এ দিই। GitHub Actions-এ test আর build চালাই। Health check, logging আর স্বাভাবিক সময়ের মধ্যে উত্তর দেওয়া নিশ্চিত করি।
+
+**Q116. Docker কেন?**
+"আমার মেশিনে চলে" সমস্যা এড়াতে। Container-এ code, library, system dependency আর version একসাথে বাঁধা থাকে, তাই একই জিনিস সব জায়গায় চলে। Reproducibility-র জন্য এটা আমার কাছে সবচেয়ে সহজ উপায়।
+
+**Q117. CI/CD-তে কী কী চালাই?**
+প্রতিটা push-এ lint, unit test, কয়েকটা ছোট data-তে model-এর sanity test আর container build। Main branch-এ merge হলে image push আর deploy। Model-এর কর্মক্ষমতা নির্দিষ্ট সীমার নিচে নামলে pipeline থামে।
+
+**Q118. Experiment tracking কীভাবে করি?**
+Weights & Biases (বা MLflow) দিয়ে প্রতিটা run-এর hyperparameter, metric, data version, code commit আর random seed লগ করি। এতে যেকোনো ফল পরে আবার বানানো যায় আর দুটো run তুলনা করা যায়।
+
+**Q119. Production-এ model-এর কর্মক্ষমতা নষ্ট হচ্ছে কীভাবে বুঝি?**
+Data drift (ইনপুটের বণ্টন বদলানো) আর concept drift (ইনপুট-আউটপুট সম্পর্ক বদলানো) দেখি। Input-এর পরিসংখ্যান, prediction-এর বণ্টন আর (লেবেল পেলে) আসল কর্মক্ষমতা নিরীক্ষণ করি। সীমা পার হলে alert আর retraining। Clinical প্রসঙ্গে নতুন হাসপাতাল বা যন্ত্র থেকে data এলে বিশেষভাবে দেখি।
+
+**Q120. Airflow কী কাজে লাগাই?**
+Data pipeline-এর ধাপগুলো (সংগ্রহ → পরিষ্কার → feature → training → মূল্যায়ন) নির্দিষ্ট ক্রমে, সময়সূচিতে আর ব্যর্থ হলে আবার চেষ্টা করে চালাতে। প্রতিটা ধাপ একটা task, পুরোটা একটা DAG।
+
+**Q121. Model আর data version কীভাবে রাখি?**
+Code git-এ, data আর model DVC বা object storage-এ hash সহ, আর প্রতিটা model-এর সাথে কোন data আর code দিয়ে বানানো তা বাঁধা। Random seed আর library version লগ করি। Biomedical কাজে এটা অডিটের জন্যও জরুরি।
+
+**Q122. Clinical বা biomedical AI-তে data privacy কীভাবে সামলাই?**
+Identifier সরাই বা pseudonymize করি, শুধু প্রয়োজনীয় data রাখি, access নিয়ন্ত্রণ আর audit log রাখি। যেখানে data বাইরে নেওয়া যায় না, সেখানে federated learning বা on-prem model ভাবি। LLM-এ রোগীর তথ্য পাঠানোর আগে নীতিমালা আর চুক্তি দেখি।
+
+**Q123. SQL আর ETL-এ আপনি কী করেন?**
+PostgreSQL-এ schema বানাই, join আর window function দিয়ে রোগীভিত্তিক feature বানাই, SQLAlchemy দিয়ে Python থেকে সামলাই। ETL-এ প্রতিটা ধাপে data-র মান পরীক্ষা করি: সারির সংখ্যা, null, অসম্ভব মান, ডুপ্লিকেট।
+
+## চ. AI evaluation (biology)
+
+**Q124. AI-র biology উত্তর ঠিক না ভুল কীভাবে যাচাই করি?**
+আমি চারটা জিনিস দেখি: biology, tool বা flag, statistics আর reproducibility। তারপর AI-র code এমন data-তে চালাই যার সঠিক ফল আমি আগে থেকে জানি। যেমন AI যদি বলে DE-তে TPM দিয়ে t-test করো, আমি জানি এটা ভুল, কারণ DESeq2 বা edgeR raw counts চায়।
+
+**Q125. AI-র সাধারণ ভুলগুলো কী কী?**
+বানানো tool, flag বা citation, ভুল statistics (raw p-value দিয়ে হাজার জিন), ভুল genome build (hg19 বনাম hg38 মিশিয়ে ফেলা), ভুল unit বা fold change-এর দিক, অতি-আত্মবিশ্বাস আর association থেকে সরাসরি causation টানা। আমি এই তালিকা ধরে উত্তর পড়ি।
+
+**Q126. ভালো benchmark প্রশ্ন কেমন হয়?**
+একটাই পরিষ্কার সঠিক উত্তর, উত্তর পেতে যুক্তি লাগে (মুখস্থ নয়), data বাস্তবসম্মত, স্বয়ংক্রিয় scoring সম্ভব, reference solution আছে আর সম্ভাব্য ভুল উত্তরগুলো আগে থেকে তালিকাভুক্ত। প্রশ্ন এমন পরিষ্কার যে দুটো অর্থ হয় না।
+
+**Q127. একটা প্রশ্ন লিখে দেখান।**
+প্রশ্ন: ৬টা নমুনার RNA-seq count matrix, ৩টা tumor আর ৩টা normal। সব tumor batch 1-এ আর সব normal batch 2-তে sequence হয়েছে। DESeq2-তে `~ batch + condition` দিলে কী ঘটে, আর tumor বনাম normal নিয়ে কী বলা যায়?
+Reference উত্তর: condition আর batch পুরোপুরি মিশে আছে (completely confounded), design matrix full rank হয় না, তাই DESeq2 error দেয়। Batch ছাড়া চালালে যে পার্থক্য আসে তা tumor-এর না batch-এর, আলাদা করা যায় না। সমাধান হলো experiment নতুন করে design করা বা কিছু নমুনা আবার sequence করা, যাতে প্রতি batch-এ দুই condition থাকে।
+সম্ভাব্য ভুল উত্তর: "ComBat দিয়ে batch ঠিক করে নাও।"
+Rubric (১০): confounding চিহ্নিত ৩, full rank না হওয়া ২, tumor ও batch আলাদা করা যায় না ২, সঠিক সমাধান ২, ComBat দিয়ে সারে না ১।
+
+**Q128. আপনার AI-র ভুল ধরার একটা ঘটনা বলুন।**
+[আমি আমার নিজের একটা ঘটনা বলব।] কাঠামো: AI একটা tool বা option বানিয়ে বলল, আমি `--help` আর documentation দেখে নিশ্চিত হলাম সেটা নেই, তারপর সঠিক বিকল্প দিলাম। Citation হলে DOI বা PubMed-এ খুঁজে যাচাই করি।
+
+**Q129. Reviewer-দের সাথে আমার একমত না হলে?**
+আমি আগে guideline আবার পড়ি, তারপর প্রমাণসহ (paper, documentation, নিজের check) কারণ লিখি। তাতেও অস্পষ্ট থাকলে নিজে সিদ্ধান্ত না নিয়ে পরিষ্কার করে জিজ্ঞেস করি।
+
+## ছ. System design ও coding
+
+**Q130. ১০,০০০ paper-এর জন্য RAG system কীভাবে design করব?**
+আমি পাঁচ ভাগে ভাবি। (১) Ingestion: PDF parse, section অনুযায়ী chunk, metadata (লেখক, সাল, DOI)। (২) Index: embedding + FAISS, সাথে BM25। (৩) Retrieval: hybrid, reranker, metadata filter। (৪) Generation: সূত্রসহ উত্তর, context-এর বাইরে গেলে "জানি না"। (৫) Evaluation ও monitoring: RAGAS, সোনার সেট, ব্যবহারকারীর feedback। আমি আগে একটা সরল baseline বানাই, তারপর প্রতিটা উন্নতির প্রভাব মেপে যোগ করি।
+
+**Q131. Small data আর কম label-এ আমি কী করি?**
+Pretrained model (যেমন biomedical BERT বা protein language model) ব্যবহার করি, transfer learning, data augmentation (যেখানে অর্থপূর্ণ), weak বা semi-supervised পদ্ধতি আর সরল model। সবসময় কঠোর cross-validation আর confidence interval দিই, কারণ ছোট test set-এ ফল অনেক ঘোরে।
+
+**Q132. Python-এ দ্রুত কী ব্যবহার করি?**
+pandas দিয়ে data সামলাই, NumPy দিয়ে vectorized হিসাব, scikit-learn দিয়ে pipeline (preprocessing আর model একসাথে, যাতে leakage না হয়), PyTorch বা TensorFlow দিয়ে deep learning, Matplotlib ও Plotly দিয়ে plot। আমি code ছোট function-এ ভাগ করি, test লিখি আর seed স্থির রাখি।
+
+Q133. আপনার প্রজেক্টের দুর্বলতা কী?
+আমার কিছু demo simulated data দিয়ে বানানো। আমি real single-cell data আর real protein structure যোগ করেছি, আর পরবর্তী ধাপে real bulk RNA-seq dataset যোগ করব। আমি সীমাবদ্ধতা খোলাখুলি বলি, কারণ ভালো reviewer তাই করেন।
+
+
+## জ. শেষ প্রশ্ন
+
+**Q134. কেন আপনাকে নেব?**
+আমি biology, statistics আর AI engineering তিনটা একসাথে বুঝি। AI-র উত্তরে সূক্ষ্ম ভুল আমি ধরতে পারি, কারণ আমি জানি সঠিক পদ্ধতি কী আর কোথায় সাধারণত ভুল হয়। আর আমি পরিষ্কার লিখি আর নিজের সীমা খোলাখুলি বলি।
+
+**Q135. পাঁচ বছর পরে নিজেকে কোথায় দেখেন?**
+আমি biomedical AI-র নির্ভরযোগ্যতা আর মূল্যায়নে কাজ করতে চাই, যাতে এসব system সত্যিই গবেষণা আর চিকিৎসায় নিরাপদে ব্যবহার করা যায়।
+
+**Q136. আমার জন্য কোনো প্রশ্ন?**
+কাজের ধরন কেমন (প্রশ্ন লেখা না উত্তর review), মান কীভাবে মাপা হয়, feedback কত দ্রুত আসে, আর কোন কোন শাখায় এখন সবচেয়ে বেশি কাজ দরকার।
+
+এই তিন ভাগে আমি পুরো প্রস্তুতি দিলাম। 
+
