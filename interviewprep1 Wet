@@ -1,0 +1,123 @@
+# Part 1: আমার উত্তর (PCR, qPCR ও শুরুর প্রশ্ন)
+
+## ক. শুরুর প্রশ্ন
+
+**Q1. নিজের সম্পর্কে বলুন।**
+আমার নাম Bejon Kumar Bhowmick। আমি genomics-এ PhD করেছি। PhD আর postdoc-এর সময় wet lab আর genomics-এ কাজ করেছি। পরে data science-এ MS করেছি, healthcare consulting করেছি, আর এখন AI ও bioinformatics system বানাই। আমি RAG pipeline, molecular docking suite আর multi-omics model বানিয়েছি। আমার সবচেয়ে বড় শক্তি হলো biology, statistics আর code একসাথে যাচাই করা।
+
+**Q2. কেন এই role-এ আবেদন করেছেন?**
+AI এখন biology-র উত্তর দেয়, কিন্তু অনেক সময় আত্মবিশ্বাসের সাথে সূক্ষ্ম ভুল করে। সেই ভুল ধরতে হলে biology, statistics আর code তিনটাই বুঝতে হয়। আমার background-এ তিনটাই আছে, তাই আমি এই কাজে সরাসরি অবদান রাখতে পারব।
+
+**Q3. আপনার background একটু ব্যাখ্যা করুন।**
+১৯৯৯ থেকে ২০০৬ আমি Japan-এ PhD করেছি। সেখানে wet lab, molecular biology আর genomic analysis শিখেছি। ২০০৬ থেকে ২০১০ Tokyo University আর University of Virginia-তে postdoc ও assistant professor হিসেবে genomics আর bioinformatics-এ গবেষণা করেছি। এরপর MBA করেছি, healthcare consulting করেছি, তারপর Purdue-IBM থেকে data science-এ MS করেছি। এখন AI ও R&D-র কাজ করি।
+
+**Q4. আপনার wet lab-এ অনেক বছরের gap আছে। এটা কীভাবে সামলাবেন?**
+হ্যাঁ, আমি বহু বছর computational আর clinical দিকে বেশি কাজ করেছি। তবে bench skill-এর মূল ভিত্তি আমার মনে আছে, আর আমি সম্প্রতি theory ঝালিয়ে নিয়েছি। আমি যা নিজে করেছি, তা পরিষ্কার বলি। যা করিনি, তা বানিয়ে বলি না। এই role-এ আমার কাজ হলো ফল ঠিক না ভুল যাচাই করা, আর সেটা আমি concept, control আর statistics দিয়ে পারি।
+
+**Q5. আপনার বড় শক্তি কী?**
+আমি তিনটা দিক একসাথে দেখি: biology ঠিক কি না, statistics ঠিক কি না, code ঠিক কি না। বেশিরভাগ ভুল এই তিনটার সংযোগস্থলে লুকিয়ে থাকে। যেমন TPM দিয়ে differential expression test করা, বা split-এর আগে feature selection করা।
+
+**Q6. আপনার দুর্বলতা কী?**
+আমি কাজ নিখুঁত করতে চাই, তাই মাঝে মাঝে বেশি সময় নিই। এখন আমি শুরুতেই সময়সীমা ঠিক করি আর কাজকে ছোট ধাপে ভাগ করি।
+
+**Q7. আপনার CV-র "~৭০% সময় কমেছে" বা "weeks to hours" সংখ্যা কীভাবে এসেছে?**
+আমি সংখ্যাটা আগের পদ্ধতির সাথে নতুন pipeline-এর সময় তুলনা করে বলেছি। আমি স্পষ্ট করি এগুলো আমার নির্দিষ্ট setup আর data-র ফল। যেখানে আমি simulated বা demo data ব্যবহার করেছি, সেখানে সরাসরি বলি এটা prototype, আর তার সীমাবদ্ধতা কী।
+
+## খ. PCR ও Gel electrophoresis
+
+**Q8. আপনি নিজে করেছেন এমন একটা wet lab technique বলুন।**
+আমি PCR আর gel electrophoresis করেছি। আমি নমুনা থেকে DNA extract করেছি। NanoDrop-এ concentration আর A260/280 দেখে purity যাচাই করেছি। তারপর target অংশ PCR-এ বাড়িয়েছি, আর agarose gel-এ ladder-এর সাথে মিলিয়ে band-এর size দেখেছি। প্রতিবার positive আর negative control রেখেছি, যাতে ফল বিশ্বাসযোগ্য হয়।
+
+**Q9. PCR-এর নীতি কী?**
+PCR একটা নির্দিষ্ট DNA অংশের কোটি কোটি কপি বানায়। প্রতি cycle-এ তিনটা ধাপ: denaturation (প্রায় ৯৫°C-এ DNA দুই সুতো আলাদা), annealing (primer তার জায়গায় লাগে), extension (প্রায় ৭২°C-এ polymerase নতুন সুতো বানায়)। ৩০-৩৫ cycle-এ পরিমাণ ঘাতক হারে বাড়ে।
+
+**Q10. Primer কীভাবে design করেন?**
+Primer ১৮-২৫ base লম্বা রাখি, GC ৪০-৬০%। দুই primer-এর Tm কাছাকাছি (প্রায় ৫৫-৬৫°C) রাখি। শেষ প্রান্তে GC clamp রাখি, কিন্তু primer-dimer, hairpin আর বারবার একই base এড়াই। Primer-BLAST দিয়ে দেখি এটা শুধু আমার target-এ লাগে কি না। Annealing temperature সাধারণত Tm থেকে প্রায় ৫°C কম রাখি।
+
+**Q11. PCR-এ কী কী reagent লাগে, প্রত্যেকটা কেন?**
+Buffer (সঠিক রাসায়নিক পরিবেশ), MgCl₂ (polymerase-এর cofactor), dNTP (নতুন DNA-র উপাদান), forward ও reverse primer, Taq polymerase, template DNA আর পানি। সবকিছু একটা master mix-এ মিশিয়ে ভাগ করি, তাহলে tube-গুলোর মধ্যে পার্থক্য কম থাকে।
+
+**Q12. Agarose gel আমি কীভাবে পড়ি?**
+Gel-এ DNA ঋণাত্মক আধানের, তাই anode-এর দিকে যায়। ছোট টুকরো দ্রুত যায়, বড় টুকরো ধীরে। আমি ladder-এর সাথে band মিলিয়ে size দেখি। প্রত্যাশিত size-এ একটা পরিষ্কার band মানে PCR ঠিক হয়েছে। Negative control-এ band থাকলে contamination। Primer-dimer সাধারণত একদম নিচে ছোট ঝাপসা band হিসেবে আসে।
+
+**Q13. ভালো DNA-র purity কত হওয়া উচিত?**
+DNA-র A260/280 প্রায় ১.৮ হলে ভালো। কম হলে protein বা phenol মিশে আছে। A260/230 প্রায় ২.০ থেকে ২.২ হওয়া উচিত, কম হলে salt বা organic দূষণ।
+
+**Q14. আপনার একটা ব্যর্থ experiment বলুন, কী ভুল হয়েছিল, কীভাবে ঠিক করেছিলেন?**
+আমার একটা PCR-এ gel-এ কোনো band আসেনি, আরেকবার অনেক অপ্রয়োজনীয় band এসেছিল। আমি প্রথমে control দেখলাম। Positive control কাজ করেছে, তাই reagent ঠিক ছিল। Negative control clean ছিল, তাই contamination ছিল না। তারপর template দেখলাম: A260/280 কম ছিল, মানে protein বা phenol মিশে ছিল। Primer-এর annealing temperature-ও কম ছিল, তাই non-specific binding হচ্ছিল। আমি DNA আবার purify করলাম, gradient PCR দিয়ে সেরা annealing temperature বের করলাম, নতুন primer dilution বানালাম আর hot-start polymerase নিলাম। তারপর একটাই পরিষ্কার band পেলাম। এই ঘটনা আমাকে শিখিয়েছে: আগে control দেখো, DNA-র মান দেখো, আর একবারে একটাই জিনিস বদলাও।
+
+**Q15. PCR-এ band না এলে আপনি কীভাবে troubleshoot করেন?**
+আমি একটা নির্দিষ্ট ক্রমে যাই। প্রথমে control: positive কাজ করেছে কি না। তারপর template-এর মান আর পরিমাণ। তারপর primer আর annealing temperature। তারপর reagent আর MgCl₂-এর পরিমাণ। শেষে cycle সংখ্যা। প্রতিবার একটা জিনিস বদলাই আর ফল লিখে রাখি।
+
+**Q16. Non-specific band বা smear এলে কী করেন?**
+Annealing temperature বাড়াই, template কমাই, cycle কমাই, hot-start polymerase ব্যবহার করি আর primer নতুন করে design করি। Smear মানে সাধারণত DNA ভাঙা বা template বেশি।
+
+**Q17. PCR-এ কোন কোন control রাখেন?**
+Negative control (template ছাড়া পানি) contamination ধরে। Positive control (জানা template) দেখায় reaction কাজ করছে কি না। আমি নতুন primer হলে একটা জানা নমুনায়ও আগে পরীক্ষা করি।
+
+**Q18. Regular Taq আর high-fidelity polymerase-এর পার্থক্য কী?**
+সাধারণ Taq-এর proofreading নেই, তাই ভুল বেশি। Detection বা genotyping-এর জন্য সেটা চলে। Sequencing বা cloning-এর জন্য আমি high-fidelity polymerase নিই, কারণ সেখানে প্রতিটা base-এর নির্ভুলতা গুরুত্বপূর্ণ।
+
+**Q19. PCR কোথায় কোথায় ব্যবহার করেন?**
+Gene detection, mutation বা variant যাচাই, pathogen শনাক্ত, genotyping আর sequencing-এর আগে নমুনা প্রস্তুত করতে।
+
+## গ. qPCR
+
+**Q20. qPCR কী, আর কেন করেন?**
+qPCR প্রতি cycle-এ real-time-এ fluorescence মেপে বলে একটা জিন বা DNA কতটা আছে। শুধু "আছে/নেই" নয়, পরিমাণ জানা যায়। আমি এটা gene expression মাপতে, RNA-seq ফল যাচাই করতে, pathogen বা viral load ধরতে আর biomarker পরীক্ষায় ব্যবহার করি।
+
+**Q21. আপনার qPCR-এর পুরো ধাপ বলুন।**
+আমি নমুনা থেকে RNA extract করি, RIN (৭ বা বেশি) আর A260/280 (প্রায় ২.০) দেখি। Reverse transcription করে cDNA বানাই। Primer design করে efficiency ৯০-১১০% কি না যাচাই করি। SYBR Green বা TaqMan mix দিয়ে reaction সাজাই, সবকিছু triplicate-এ আর NTC ও reference gene সহ। প্রায় ৪০ cycle চালাই, SYBR হলে শেষে melt curve দেখি। তারপর Ct → ΔCt → ΔΔCt → fold change বের করে statistics ও graph করি।
+
+**Q22. PCR আর qPCR-এর পার্থক্য কী?**
+PCR শেষে gel-এ band দেখে, মানে end-point আর গুণগত ফল। qPCR cycle চলাকালেই সংকেত মাপে, তাই পরিমাণগত ফল দেয়।
+
+**Q23. Ct মানে কী?**
+যে cycle-এ fluorescence সংকেত threshold পার হয়, সেটাই Ct। জিন বেশি থাকলে Ct কম আসে, কারণ সংকেত আগেই threshold ছোঁয়।
+
+**Q24. SYBR Green আর TaqMan-এর পার্থক্য কী?**
+SYBR Green যেকোনো double-stranded DNA-তে লাগে, তাই সস্তা আর সহজ, কিন্তু primer-dimer আর non-specific product-ও সংকেত দেয়। তাই melt curve দিয়ে যাচাই করতে হয়। TaqMan-এ target-নির্দিষ্ট probe থাকে, তাই বেশি নির্দিষ্ট, কিন্তু খরচ বেশি আর probe design লাগে।
+
+**Q25. ΔΔCt পদ্ধতি বুঝিয়ে বলুন।**
+প্রথমে প্রতি নমুনায় ΔCt = target-এর Ct − reference gene-এর Ct। তারপর ΔΔCt = রোগীর ΔCt − সুস্থের ΔCt। Fold change = 2^(−ΔΔCt)। যেমন রোগীতে target Ct ২৪, reference ২০ হলে ΔCt = ৪। সুস্থে target ২৬, reference ২০ হলে ΔCt = ৬। ΔΔCt = −২, আর fold change = ২² = ৪ গুণ বেশি।
+
+**Q26. Reference gene কেন লাগে, আর কীভাবে বাছি?**
+নমুনায় RNA বা cDNA-র পরিমাণ সমান নয়, তাই একটা স্থির জিনের সাথে তুলনা করে সমান করি। GAPDH বা β-actin জনপ্রিয়, কিন্তু hypoxia-র মতো অবস্থায় GAPDH-এর মাত্রা বদলায়। তাই আমি আগে কয়েকটা reference gene পরীক্ষা করি, কোনটা সব condition-এ স্থির তা দেখি, আর সম্ভব হলে একাধিক ব্যবহার করি।
+
+**Q27. কোন control কেন?**
+Extraction blank extraction-এর দূষণ ধরে। No-RT control genomic DNA মিশে আছে কি না ধরে। NTC primer বা mix-এর contamination ধরে। Positive control দেখায় reaction কাজ করছে কি না। Triplicate pipetting-এর ভুল ধরে। Melt curve non-specific product ধরে। Reference gene নমুনার পরিমাণের পার্থক্য সমান করে।
+
+**Q28. No-RT control-এ Ct এলে কী করেন?**
+তার মানে নমুনায় genomic DNA মিশে আছে। আমি DNase treatment করে cDNA আবার বানাই। সম্ভব হলে primer এমনভাবে design করি যেন exon-exon junction পার হয়।
+
+**Q29. NTC-তে amplification এলে কী করেন?**
+তাহলে পুরো run বাতিল করি, কারণ reagent বা primer-এ contamination আছে। আমি নতুন aliquot নিই, pre-PCR আর post-PCR জায়গা আলাদা রাখি, filter tip ব্যবহার করি আর bench ১০% bleach দিয়ে পরিষ্কার করি।
+
+**Q30. Melt curve কী বলে?**
+SYBR run-এর শেষে তাপমাত্রা ধীরে বাড়িয়ে সংকেত দেখি। একটা sharp peak মানে product একটাই আর নির্দিষ্ট। একাধিক peak মানে primer-dimer বা non-specific product। তখন আমি primer redesign করি, annealing temperature বাড়াই বা primer-এর পরিমাণ কমাই।
+
+**Q31. Primer efficiency কীভাবে যাচাই করেন?**
+Serial dilution দিয়ে standard curve বানাই। Slope থেকে efficiency = 10^(−১/slope) − ১। Slope প্রায় −৩.৩২ হলে efficiency প্রায় ১০০%। আমি ৯০ থেকে ১১০% চাই। এর বাইরে হলে primer নতুন করে design করি।
+
+**Q32. Triplicate-এ Ct-র পার্থক্য বেশি হলে কী করেন?**
+তিনটার পার্থক্য ০.৩-এর বেশি হলে আমি এটাকে pipetting-এর ভুল ধরি। Master mix বানাই, calibrated pipette নিই, reverse pipetting করি আর আবার চালাই।
+
+**Q33. Ct ৩৫-এর পরে এলে বা সংকেত না এলে কী করেন?**
+তার মানে template কম বা RNA খারাপ। আমি RIN আর A260/280 আবার দেখি, প্রয়োজনে RNA আবার extract করি আর cDNA-র পরিমাণ বাড়াই।
+
+**Q34. আপনার qPCR-এর একটা সমস্যা আর সমাধান বলুন।**
+আমার melt curve-এ দুটো peak এসেছিল, মানে primer একাধিক product বানাচ্ছিল। আমি gel-এ primer-dimer দেখলাম, primer নতুন করে design করলাম, temperature gradient চালালাম আর একটাই sharp peak পেলাম। তারপর আসল নমুনা চালানোর আগে standard curve দিয়ে efficiency যাচাই করলাম। এরপর থেকে আমি primer আগে validate না করে কোনো আসল নমুনা চালাই না।
+
+**Q35. MIQE guidelines কী?**
+অনেক প্রকাশিত qPCR paper-এ control, primer-এর তথ্য আর reference gene যাচাইয়ের বিবরণ থাকত না, তাই ফল দোহরানো কঠিন ছিল। ২০০৯ সালে MIQE guidelines এসে একটা তালিকা দিল যে কী কী তথ্য জানানো উচিত। আমি আমার qPCR কাজ এই তালিকা মনে রেখে করি।
+
+**Q36. আপনার RNA-seq ফল qPCR দিয়ে কীভাবে যাচাই করেন?**
+Pipeline-এ পাওয়া differentially expressed gene থেকে কয়েকটা বেছে নিই, বেশি আর কম দুই ধরনেরই। একই RNA বা নতুন biological নমুনায় qPCR করি, স্থির reference gene দিয়ে। Fold change-এর দিক মিললে আর মাত্রা কাছাকাছি হলে আমি বলি computational ফল সমর্থিত হয়েছে।
+
+**Q37. Contamination কীভাবে এড়ান?**
+Pre-PCR আর post-PCR জায়গা আলাদা, filter tip, গ্লাভস বদল, ছোট aliquot করা reagent আর প্রতি run-এ NTC। Cell culture-এর ক্ষেত্রে আমি জানি অনেক cell line আসলে HeLa দিয়ে দূষিত বা ভুল পরিচয়ের ছিল, তাই STR profiling আর mycoplasma test জরুরি।
+
+**Q38. আপনার wet lab ফল কীভাবে আপনার bioinformatics কাজের সাথে জোড়া লাগে?**
+Bench-এর ফল আমার analysis-এর ভিত্তি। নমুনার মান খারাপ হলে (কম RIN, বেশি duplicate) computational ফলও বিকৃত হয়। আবার pipeline-এর ফল আমি bench-এ যাচাই করি। এই দুই দিক বুঝি বলেই আমি দুই জায়গার ভুল ধরতে পারি।
+
+পরের অংশে (Part 2) থাকবে cell culture, microscopy, protein purification, Western blot, IP/Co-IP, ELISA আর research design-এর প্রশ্ন, একই ভঙ্গিতে আমার উত্তর dewa hoyese 
