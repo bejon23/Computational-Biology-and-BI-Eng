@@ -1,0 +1,151 @@
+My experimental skills
+
+
+Q1. A wet lab technique I have done: PCR + gel electrophoresis
+
+Flow path (what I did):
+I collected the sample (blood or tissue).
+
+I extracted DNA (lysis → protein removal → DNA precipitation → wash).
+
+I checked DNA quality on NanoDrop (concentration and A260/280 purity).
+
+I set up the PCR master mix (buffer, dNTPs, primers, Taq polymerase, template, water).
+
+I ran thermal cycling (denaturation → annealing → extension, 30-35 cycles).
+
+I ran gel electrophoresis (agarose gel + DNA ladder + loading dye).
+
+I visualized the gel under UV or a gel doc system.
+
+I interpreted the result (band size vs ladder, band present or absent).
+
+Purpose and practical use:
+I use PCR to make millions of copies of one DNA region so I can study it.
+I use it for gene detection, mutation or variant checking, pathogen detection, and sample preparation for sequencing.
+
+I use the gel to confirm that my product is the right size and that the reaction worked.
+
+How I say it: "I extracted DNA, checked its purity, amplified my target region by PCR, and confirmed the product on an agarose gel. This confirmation step is important before sequencing or any downstream analysis."
+
+An experiment that failed
+Situation: My PCR gave no band, or multiple non-specific bands, on the gel.
+How I troubleshot it:
+I checked my controls. The positive control worked, so my reagents were fine. The negative control was clean, so there was no contamination.
+
+I checked my template DNA. The A260/280 ratio was low, which suggested protein or phenol contamination.
+
+I checked my primers. My annealing temperature was too low, which caused non-specific binding.
+
+How I fixed it:
+I re-purified the DNA.
+I ran a gradient PCR to find the best annealing temperature.
+I made fresh primer dilutions.
+I used a hot-start polymerase.
+I repeated the PCR and got a single sharp band of the correct size.
+
+What I learned: I always run positive and negative controls, and I check DNA quality before PCR. I change one variable at a time, so I know exactly what the problem was.
+Why this answer matters: It shows that I can troubleshoot logically, not just follow a protocol.
+
+
+Quick tips for my works: 
+I do in this order: what I did → why → what went wrong → how I fixed it → what I learned.
+
+I name one number or detail (annealing temperature, A260/280 value, number of cycles). It makes my answer sound real.
+
+My strength is genomics and data, so I add: "I connect this wet lab data with my bioinformatics engineering and analysis."
+
+
+
+qPCR (real-time PCR)
+
+Flow path (what I did):
+I collected the sample (blood, tissue, or cells).
+
+I extracted RNA (for gene expression) or DNA.
+
+I checked quality on NanoDrop (concentration, A260/280).
+
+I made cDNA by reverse transcription (for RNA samples).
+
+I designed and validated my primers (efficiency 90-110%).
+
+I set up the reaction: SYBR Green or TaqMan master mix, primers, cDNA, water. 
+
+I ran everything in triplicate with a no-template control (NTC) and a reference gene (e.g., GAPDH or β-actin).
+
+I ran it on the real-time machine (40 cycles) with a melt curve at the end.
+
+I analyzed the data: Ct values → ΔCt → ΔΔCt → fold change.
+
+I did statistics and made a graph (e.g., t-test, bar chart).
+
+Purpose and practical uses:
+I use qPCR to measure how much of a gene or DNA is present, not just yes or no.
+
+Gene expression: I check if a gene is up or down in disease vs normal.
+
+Validation: I confirm RNA-seq or microarray results.
+
+Pathogen detection and viral load (e.g., desired cell testing).
+
+Copy number and mutation or genotyping assays.
+
+Biomarker testing for diagnostics.
+
+How I say it: "I used qPCR to measure gene expression. I made cDNA, ran my samples in triplicate with a reference gene, checked the melt curve for specificity, and calculated fold change with the ΔΔCt method.”
+
+
+Problems faced , cause and how I solved them? 
+
+Prob: Amplification in NTC (negative control)
+Cause: Contamination or primer-dimers
+Solution: Used fresh aliquots, separate pre- and post-PCR areas, filter tips, cleaned the bench with 10% bleach
+
+Prob: Multiple peaks in melt curve
+
+Cause: Non-specific products or primer-dimers
+
+Sol: Redesigned primers, raised annealing temperature, lowered primer concentration
+
+Prob: High Ct variation between triplicates
+Cause: Pipetting error
+Sol: Made a master mix, used calibrated pipettes, reverse pipetting
+
+
+Prob: Late Ct (above 35) or no signal
+
+Cause: Poor RNA quality or low template
+
+Sol: Re-extracted RNA, checked RIN or A260/280, added more cDNA
+
+
+Prob: Poor primer efficiency
+Cause: Bad primer design
+Sol: Ran a standard curve (serial dilution), checked slope, redesigned primers
+
+
+Prob: Unstable reference gene
+Cause: Reference gene changed between conditions
+
+Sol: Tested several reference genes and picked the stable one
+
+
+
+Best story to tell (pick one):
+
+"My melt curve showed two peaks, so my primers were amplifying more than one product. I checked primer-dimers on a gel, redesigned the primers, ran a temperature gradient, and got a single sharp peak. After that, I checked efficiency with a standard curve before running my real samples."
+
+What I learned try to always validate primers first, always run the NTC and a reference gene, and never trust Ct values without checking the melt curve.
+
+
+Know the difference from PCR: 
+
+PCR gives an end-point result (a band on a gel). 
+
+qPCR gives quantitative, real-time data.
+Link to my strength: "I validated my RNA-seq differentially expressed genes with qPCR."
+
+
+I also have good experiences on cell culture,  Biochemical and Immuno assays, Microscopy, Protein Purification, Western blot, IP, Co-IP. 
+
