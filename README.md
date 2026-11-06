@@ -64,6 +64,12 @@ Lead3 project:
 https://colab.research.google.com/drive/1NzzQBP3dJ2NSP6hxs7HDXZyuRHkT0DBo#scrollTo=Syzb1IYPZb3V
 
 
+Project leadc4 : Hospital ID vs Diagnosis ID alignment 
+
+
+https://colab.research.google.com/drive/1oEmhAohfSs7AYdJABmuauOfc1WmUKzdo#scrollTo=-dNpA6ikLn-v
+
+
 Project Lead 5: 
 
 https://colab.research.google.com/drive/1CTaS-4-meGy9c5IDLr3W3zI3j7qGLaKX#scrollTo=lUs2bdJPq725
